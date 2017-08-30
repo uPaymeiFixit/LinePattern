@@ -16,7 +16,7 @@ var size = new Array;
 var xdirection = new Array;
 var ydirection = new Array;
 var left = new Array;
-var top = new Array;
+var y = new Array;
 var speed = new Array;
 var color = new Array;
 
@@ -30,7 +30,7 @@ window.onload = function load() {
 		ydirection[i] = Math.random() < 0.5 ? -1 : 1;
 		speed[i] = Math.floor(Math.random() * maxSpeed + minSpeed);
 		size[i] = Math.floor(Math.random() * maxSize + minSize);
-		top[i] = Math.floor(Math.random() * (window.innerHeight));
+		y[i] = Math.floor(Math.random() * (window.innerHeight));
 		left[i] = Math.floor(Math.random() * (window.innerWidth));
 		color[i] = '#' + (Math.random() * (0xFFFFFF + 1) << 0).toString(16);
 
@@ -42,11 +42,11 @@ function draw() {
 		for(var i = 0; i < quantity; i++) {
 			ctx.fillStyle = color[i];
 			ctx.beginPath();
-			ctx.arc(left[i], top[i], size[i], 0, Math.PI * 2, true);
+			ctx.arc(left[i], y[i], size[i], 0, Math.PI * 2, true);
 			ctx.closePath();
 			ctx.fill();
 
-			top[i] += speed[i] * ydirection[i];
+			y[i] += speed[i] * ydirection[i];
 			left[i] += speed[i] * xdirection[i];
 
 			if(left[i] >= window.innerWidth) {
@@ -54,9 +54,9 @@ function draw() {
 			} else if(left[i] <= 0) {
 				xdirection[i] = 1;
 			}
-			if(top[i] >= window.innerHeight) {
+			if(y[i] >= window.innerHeight) {
 				ydirection[i] = -1;
-			} else if(top[i] <= 0) {
+			} else if(y[i] <= 0) {
 				ydirection[i] = 1;
 			}
 		}
